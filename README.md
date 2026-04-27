@@ -26,3 +26,5 @@ A través de la implementación de Windhawk, logré inyectar con éxito efectos 
 * Prueba de concepto:
 ![SSMS 22 con Backdrop forzado](./img/MicaForzado-SSMS22.png)
 -- SSMS 22 con efecto Mica Alt (Forzado mediante inyección de Windhawk) --
+
+*Nota: Mantego la configuración manual del registro para preservar el Dark Mode nativo de SSMS 22, garantizando un entorno de trabajo con menor fatiga visual sin depender de software de terceros.
