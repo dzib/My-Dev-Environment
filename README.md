@@ -9,9 +9,28 @@ Este repositorio contiene la configuración de mi entorno de trabajo en Windows 
 - **SQL Server 2022 & SSMS**: Gestión de bases de datos. *Edge Case
 
 ## ⚡ Scripts de Utilidad
-En la carpeta `/scripts` encontrarás archivos `.bat` para gestionar el servicio de SQL Server manualmente y ahorrar recursos:
-- `sqlon.bat`: Inicia el servicio `MSSQLSERVER`.
-- `sqloff.bat`: Detiene el servicio para reducir el consumo de CPU y ruido del ventilador.
+n la carpeta `/scripts` encontrarás scripts para gestionar el servicio de SQL Server manualmente y ahorrar recursos:
+
+### Batch (.bat)
+- `OFF_SQL.bat`: Inicia el servicio `MSSQLSERVER`.
+- `ON_SQL.bat`: Detiene el servicio para reducir el consumo de CPU y ruido del ventilador.
+
+### PowerShell (.ps1)
+- `SQLServiceMenu_v1.ps1` → Versión inicial del menú interactivo para controlar SQL Server.
+- `SQLServiceMenu_v2.ps1` → Versión mejorada con resumen automático y opción rápida.
+
+#### 🚀 Uso rápido
+1. Abrir PowerShell como administrador.
+2. Ejecutar el script:
+   ```powershell
+   .\SQLServiceMenu_v2.ps1
+
+## 📝 Historial de versiones
+
+### SQLServiceMenu.ps1
+- **v1 (2026-05-01):** Menú básico con pausa manual.
+- **v2 (2026-05-02):** Menú mejorado con resumen automático y opción rápida.
+
 
 ## 🎨 Ajustes Visuales
 He forzado el efecto Mica en aplicaciones basadas en Chromium (Chrome/Edge) usando el flag:
