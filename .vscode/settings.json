@@ -1,0 +1,16 @@
+{
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.shellArgs.windows": ["-NoExit", "-Command", "& {Import-Module posh-git; Import-Module oh-my-posh}"],
+  "editor.fontFamily": "Cascadia Code, 'Courier New'",
+  "editor.fontSize": 12,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true
+  },
+  "[powershell]": {
+    "editor.defaultFormatter": "ms-vscode.powershell",
+    "editor.formatOnSave": true
+  }
+}
