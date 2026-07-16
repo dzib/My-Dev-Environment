@@ -1,37 +1,40 @@
 ![PowerShell](https://img.shields.io/badge/PowerShell-7.6.3-blue) ![Python](https://img.shields.io/badge/Python-3.14-yellow) ![R](https://img.shields.io/badge/R-4.6.1-red) ![VS Code](https://img.shields.io/badge/VSCode-Optimized-green)
 
 # My Windows Development Environment 🚀
+
 ---
 
-Repositorio de configuración (Dotfiles) para Windows 11 con PowerShell y VS Code. Este proyecto documenta mi entorno completo de trabajo, incluyendo configuración, scripts y herramientas esenciales.
+Arquitectura de desarrollo estandarizada para **Data Engineering** y **Analytics**. Este repositorio contiene la configuración ("dotfiles") para mantener un entorno de trabajo portable, eficiente y libre de conflictos en Windows 11.
 
-## 📋 Estructura
+## 🏗️ Estructura del Laboratorio
+
 ---
+
 ```text
- ├── .vscode/ # Configuración de VS Code 
- │ └── settings.json # Ajustes de terminal, fuentes, formato
- ├── batch/scripts/ # Scripts Batch (.bat) | Configuración de Batch/CMD. 
- │ ├── OFF_SQL.bat # Detiene SQL Server (ahorra recursos).
- │ └── ON_SQL.bat # Inicia SQL Server.
- ├── powershell/scripts/ # Scripts PowerShell (.ps1) | Configuración de PowerShell. 
- │    ├──Microsoft.PowerShell_profile.ps1 # Perfil personalizado (alias, funciones).
- │    ├── setup_env.ps1  # Script de instalación automática.
- │    ├── SQLServiceMenu_v1.ps1 # Menú interactivo (v1).
- │    └── SQLServiceMenu_v2.ps1 # Menú interactivo ([v1.1] - mejorado).
- ├── config/ # Configuración adicional 
- ├── docs/ # Documentación y guías.
- ├── IMG/ # Capturas y imágenes. 
+ ├── .vscode/                                   # Configuración de VS Code
+ │ └── settings.json                            # Ajustes de terminal, fuentes, formato.
+ ├── powershell/scripts/                        # Scripts PowerShell (.ps1) | Configuración de PowerShell.
+ │    ├──Microsoft.PowerShell_profile.ps1       # Perfil personalizado (alias, funciones).
+ │    ├── setup_env.ps1                         # Script de instalación automática.
+ │    ├── SQLServiceMenu_v1.ps1                 # Menú interactivo (v1).
+ │    └── SQLServiceMenu_v2.ps1                 # Menú interactivo ([v1.1] - mejorado).
+ ├── config/                                    # Configuración adicional
+ ├── docs/                                      # Documentación y guías.
+ ├── IMG/                                       # Capturas y imágenes.
  └── README.md
 ```
+
 ### 🚀 Instalación rápida
 
 ### Requisitos previos
+
 - Windows 11
 - PowerShell 7+
 - VS Code
 - Git
-  
+
 ### Pasos de instalación
+
 1. **Clonar el repositorio:**
    ```bash
    git clone https://github.com/dzib/My-Dev-Environment.git
@@ -44,28 +47,36 @@ Repositorio de configuración (Dotfiles) para Windows 11 con PowerShell y VS Cod
 3. Reiniciar PowerShell para aplicar cambios.
 
 ## 🛠 Herramientas del Entorno
+
 ---
+
 ### Sistema & Personalización
+
 - **Windhawk** - Personalización de interfaz (Efecto Mica/Acrylic).
 - **PowerToys** - Utilidades de productividad (FancyZones, Renombramiento Rápido, etc.).
 - **TranslucentTB** - Barra de tareas minimalista.
-- **PC Manager** 
+- **PC Manager**
 
 ### Desarrollo & Bases de Datos
+
 - **SQL Server 2022** - Motor de base de datos.
 - **SQL Server Management Studio (SSMS) 22** - Gestión de BD con tema oscuro personalizado.
 - **VS Code** - Editor de código con extensión PowerShell.
 - **PowerShell 7** - Shell moderno para Windows.
 
 ### Productividad
+
 - **7-Zip** - Compresión de archivos.
 - **Notion** - Notas y documentación.
 - **Chrome/Edge** - Navegadores con efectos Mica inyectados.
 - **Terminal Windows** - Terminal integrada.
 
 ## ⚡ Scripts de Utilidad
+
 ---
+
 ### Gestión de SQL Server
+
 Los scripts en automatizan la gestión del servicio SQL Server para optimizar recursos: `/scripts`
 
 ### Batch (.bat)
@@ -80,7 +91,9 @@ Los scripts en automatizan la gestión del servicio SQL Server para optimizar re
 - `setup_env.ps1` → Instalador automático del entorno.
 
 ### Cómo usar los scripts
+
 Desde PowerShell:
+
 ```powershell
 # Ejecutar menú SQL Server v2 (recomendado)
 .\powershell\scripts\SQLServiceMenu_v2.ps1
@@ -88,7 +101,9 @@ Desde PowerShell:
 # Ejecutar instalador
 .\powershell\scripts\setup_env.ps1
 ```
+
 Desde CMD/Batch:
+
 ```bash
 # Iniciar SQL Server
 .\batch\scripts\OFF_SQL.bat
@@ -98,8 +113,11 @@ Desde CMD/Batch:
 ```
 
 ## 🎨 Personalizaciones Aplicadas
+
 ---
-###  Efectos Mica en Aplicaciones Chromium
+
+### Efectos Mica en Aplicaciones Chromium
+
 Inyectado mediante Windhawk con flag:
 
 ```Código
@@ -107,27 +125,31 @@ Inyectado mediante Windhawk con flag:
 ```
 
 ### Aplicado en:
+
 - Google Chrome
 - Microsoft Edge
 - Aplicaciones Electron
-  
+
 ### SSMS 22 Personalizado
+
 - Tema oscuro nativo activado.
 - Efecto Mica Alt forzado mediante inyección.
 - Configuración en Registro de Windows para persistencia. - (Prueba de concepto)
-Captura: ![ SSMS 22 con Mica](./img/MicaForzado-SSMS22.png)
-  * -- SSMS 22 con efecto Mica Alt (Forzado mediante inyección de Windhawk) --
-   *Nota: Mantego la configuración manual del registro para preservar el Dark Mode nativo de SSMS 22, garantizando un entorno de trabajo con menor fatiga visual sin depender de software de terceros.
-  
+  Captura: ![ SSMS 22 con Mica](./img/MicaForzado-SSMS22.png)
+  - -- SSMS 22 con efecto Mica Alt (Forzado mediante inyección de Windhawk) --
+    \*Nota: Mantego la configuración manual del registro para preservar el Dark Mode nativo de SSMS 22, garantizando un entorno de trabajo con menor fatiga visual sin depender de software de terceros.
+
 ## 📝 Perfil de PowerShell
+
 ---
+
 El archivo incluye: `Microsoft.PowerShell_profile.ps1`
 
 - Alias personalizados forzado (para R, etc.). `R`
 - Configuración de lectura de línea (modo de edición de Windows).
 - Mensaje de bienvenida personalizado.
 - Variables de entorno automáticas.
-  
+
 Edítalo según tus necesidades:
 
 ```PowerShell
@@ -139,9 +161,11 @@ code $PROFILE
 ```
 
 ## 🔄 Historial de Versiones
+
 ---
 
 ### v1.1.1 (2026-15-07) - Lanzamiento inicial
+
 - ✅ Estructura base del repositorio.
 - ✅ Scripts SQL Server (v1 y v2).
 - ✅ Configuración VS Code (.vscode/settings.json).
@@ -149,11 +173,13 @@ code $PROFILE
 - ✅ Script de instalación automática.
 - ✅ Documentación completa.
 
- **v1.0.0 (2026-05-01):** Menú básico con pausa manual.
- **v1.1.0 (2026-05-02):** Menú mejorado con resumen automático y opción rápida.
+  **v1.0.0 (2026-05-01):** Menú básico con pausa manual.
+  **v1.1.0 (2026-05-02):** Menú mejorado con resumen automático y opción rápida.
 
 ## 📚 Documentación Adicional
+
 ---
+
 Para guías detalladas, consulta la carpeta: `/docs`
 
 - Montaje inicial.
@@ -161,7 +187,9 @@ Para guías detalladas, consulta la carpeta: `/docs`
 - Personalización avanzada.
 
 ## 🤝 Contribuciones
+
 ---
+
 Este es un repositorio personal, pero las mejoras son bienvenidas. Si tienes sugerencias:
 
 1. Crea una rama `feature/nombre-mejora`
@@ -169,12 +197,14 @@ Este es un repositorio personal, pero las mejoras son bienvenidas. Si tienes sug
 3. Abre un Pull Request.
 
 ## 📄 Licencia
+
 ---
+
 **Autor:** **Jesús Alberto Dzib Ku**
 Este proyecto es de uso personal. Siéntete libre de adaptarlo a tu entorno.
 ⚖️ **Licencia MIT** © 2026
 
-*"Construyendo sistemas que no solo procesan datos, sino que cuentan historias."*
+_"Construyendo sistemas que no solo procesan datos, sino que cuentan historias."_
 
 ### 📝 Conclusión y Aprendizajes Técnicos
 
