@@ -1,4 +1,4 @@
-# SQLServiceMenu.ps1 | v1.2.0 | - Menú persistente con auto-elevación
+# SQLServiceMenu.ps1 | v1.2.0 | - Menú persistente con auto-elevación.
 $ServiceName = "MSSQLSERVER"
 $logDir = "D:\01.Datos_AlbertoDzib\02.Logs_Locales\00.LogSQLs"
 $logPath = Join-Path $logDir "SQL_Service_Log.md"
@@ -11,7 +11,11 @@ $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Pri
 if (!$currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Host "⚠️ Se requieren privilegios de administrador para gestionar servicios." -ForegroundColor Yellow
     Write-Host "Relanzando el script con privilegios elevados..." -ForegroundColor Cyan
-    Start-Process powershell -Verb RunAs -ArgumentList "-File `"$PSCommandPath`""
+    # Asignación de la ruta exacta de a PowerShell 7.
+    $pwshPath = "C:\Program Files\WindowsApps\Microsoft.PowerShell_7.6.3.0_x64__8wekyb3d8bbwe\pwsh.exe"
+    
+    # Lanzamos el proceso usando la ruta explícita.
+    Start-Process -FilePath $pwshPath -Verb RunAs -ArgumentList "-File `"$PSCommandPath`""
     exit
 }
 
