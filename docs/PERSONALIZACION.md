@@ -42,6 +42,7 @@ Recarga con: `. $PROFILE`
 ## VS Code
 
 Edita `.vscode/settings.json` para cambiar:
+
 - **Fuente:** `"editor.fontFamily"`
 - **Tamaño:** `"editor.fontSize"`
 - **Terminal por defecto:** `"terminal.integrated.defaultProfile.windows"`
@@ -55,4 +56,4 @@ Edita `.vscode/settings.json` para cambiar:
 
 ---
 
-**Próxima actualización:** v1.1 con más personalizaciones
+**Próxima actualización:** v1.2.1 con más personalizaciones.
