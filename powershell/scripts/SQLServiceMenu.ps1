@@ -1,5 +1,10 @@
-# SQLServiceMenu.ps1 - Menú persistente con auto-elevación
+# SQLServiceMenu.ps1 | v1.2.0 | - Menú persistente con auto-elevación
 $ServiceName = "MSSQLSERVER"
+$logDir = "D:\01.Datos_AlbertoDzib\02.Logs_Locales\00.LogSQLs"
+$logPath = Join-Path $logDir "SQL_Service_Log.md"
+
+# --- ASEGURAR DIRECTORIO DE LOGS ---
+if (!(Test-Path $logDir)) { New-Item -ItemType Directory -Path $logDir }
 
 # --- BLOQUE DE AUTO-ELEVACIÓN ---
 $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
@@ -10,43 +15,43 @@ if (!$currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Adminis
     exit
 }
 
+# --- FUNCIONES ---
+function Write-Log {
+    param([string]$message)
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    Add-Content -Path $logPath -Value "### $timestamp `n- $message"
+}
+
 # --- MENÚ PRINCIPAL ---
-$option = ""
+function Show-Menu {
+    $service = Get-Service -Name $ServiceName -ErrorAction SilentlyContinue
+    Write-Host "`n--- SQL Server Management [v1.2.0] ---" -ForegroundColor Yellow
+    Write-Host "Estado actual: $($service.Status)" -ForegroundColor Cyan
+    Write-Host "1. Iniciar | 2. Detener | 3. Toggle | 4. Salir" -ForegroundColor Gray
+}
+
+# --- LÓGICA PRINCIPAL ---
 do {
-    Write-Host "`n--- SQL Server Management ---" -ForegroundColor Yellow
-    Write-Host "1. Iniciar SQL Server" -ForegroundColor Green
-    Write-Host "2. Detener SQL Server" -ForegroundColor Red
-    Write-Host "3. Estado del Servicio" -ForegroundColor Cyan
-    Write-Host "4. Cambiar estado (Toggle)" -ForegroundColor Magenta
-    Write-Host "5. Salir" -ForegroundColor Gray
-
-    $option = Read-Host "Selecciona una opción"
-    $status = Get-Service -Name $ServiceName -ErrorAction SilentlyContinue
-
-    switch ($option) {
+    Show-Menu
+    $choice = Read-Host "Selecciona una opción"
+    switch ($choice) {
         "1" { 
-            try { Start-Service -Name $ServiceName -ErrorAction Stop; Write-Host "Servicio iniciado con éxito." -ForegroundColor Green }
+            try { Start-Service -Name $ServiceName; Write-Log "Iniciado"; Write-Host "✅" -ForegroundColor Green }
             catch { Write-Host "Error al iniciar el servicio: $_" -ForegroundColor Red }
         }
         "2" { 
-            try { Stop-Service -Name $ServiceName -Force -ErrorAction Stop; Write-Host "Servicio detenido con éxito." -ForegroundColor Yellow }
+            try { Stop-Service -Name $ServiceName -Force; Write-Log "Detenido"; Write-Host "❌" -ForegroundColor Yellow }
             catch { Write-Host "Error al detener el servicio: $_" -ForegroundColor Red }
         }
         "3" { 
-            if ($status) { Write-Host "Estado actual: $($status.Status)" -ForegroundColor Cyan }
-            else { Write-Host "No se pudo encontrar el servicio '$ServiceName'." -ForegroundColor Red }
+            $s = Get-Service -Name $ServiceName
+            if ($s.Status -eq 'Running') { Stop-Service -Name $ServiceName -Force; Write-Log "Toggle: Detenido" }
+            else { Start-Service -Name $ServiceName; Write-Log "Toggle: Iniciado" }
+            exit 
         }
-        "4" { 
-            if ($status.Status -eq 'Running') {
-                Stop-Service -Name $ServiceName -Force -Verbose
-                Write-Host "Servicio detenido." -ForegroundColor Yellow
-            }
-            else {
-                Start-Service -Name $ServiceName -Verbose
-                Write-Host "Servicio iniciado." -ForegroundColor Green
-            }
-        }
-        "5" { Write-Host "Saliendo del gestor..." -ForegroundColor Gray }
+        "4" { Write-Host "Saliendo del gestor..." -ForegroundColor Gray }
         Default { Write-Host "Opción no válida." -ForegroundColor Red }
     }
-} while ($option -ne "5")
+} while ($choice -ne "4")
+
+# --------------------------------------
