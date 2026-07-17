@@ -25,9 +25,9 @@ function Write-Log {
 # --- MENÚ PRINCIPAL ---
 function Show-Menu {
     $service = Get-Service -Name $ServiceName -ErrorAction SilentlyContinue
-    Write-Host "`n--- SQL Server Management [v1.2.0] ---" -ForegroundColor Yellow
+    Write-Host "`n--- SQL Server Management [v1.2.0] ($serviceName) ---" -ForegroundColor Yellow
     Write-Host "Estado actual: $($service.Status)" -ForegroundColor Cyan
-    Write-Host "1. Iniciar | 2. Detener | 3. Toggle | 4. Salir" -ForegroundColor Gray
+    Write-Host "1. Iniciar | 2. Detener | 3. Toggle (On/Off) y salir | 4. Salir" -ForegroundColor Gray
 }
 
 # --- LÓGICA PRINCIPAL ---
@@ -36,20 +36,20 @@ do {
     $choice = Read-Host "Selecciona una opción"
     switch ($choice) {
         "1" { 
-            try { Start-Service -Name $ServiceName; Write-Log "Iniciado"; Write-Host "✅" -ForegroundColor Green }
+            try { Start-Service -Name $ServiceName; Write-Log "🟢 Iniciado"; Write-Host "✅" -ForegroundColor Green }
             catch { Write-Host "Error al iniciar el servicio: $_" -ForegroundColor Red }
         }
         "2" { 
-            try { Stop-Service -Name $ServiceName -Force; Write-Log "Detenido"; Write-Host "❌" -ForegroundColor Yellow }
+            try { Stop-Service -Name $ServiceName -Force; Write-Log "🔴 Detenido"; Write-Host "❌" -ForegroundColor Yellow }
             catch { Write-Host "Error al detener el servicio: $_" -ForegroundColor Red }
         }
         "3" { 
             $s = Get-Service -Name $ServiceName
             if ($s.Status -eq 'Running') { Stop-Service -Name $ServiceName -Force; Write-Log "Toggle: Detenido" }
-            else { Start-Service -Name $ServiceName; Write-Log "Toggle: Iniciado" }
+            else { Start-Service -Name $ServiceName; Write-Log "Toggle: Iniciado"; Write-Host "`n👋 Acción completada, saliendo..." -ForegroundColor Green }
             exit 
         }
-        "4" { Write-Host "Saliendo del gestor..." -ForegroundColor Gray }
+        "4" { Write-Host "Saliendo del gestor 👋..." -ForegroundColor Gray }
         Default { Write-Host "Opción no válida." -ForegroundColor Red }
     }
 } while ($choice -ne "4")
